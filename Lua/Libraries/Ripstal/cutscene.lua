@@ -1,9 +1,11 @@
 ---@class Cutscene: Class
 local Cutscene, super = Class()
 
+Cutscene.PATH_PREFIX = "RipstalCutscenes."
+
 function Cutscene:init(func, ...)
     assert(Encounter == nil, "Attempt to run a cutscene from outside the Encounter script. Use a call()!")
-    self.coroutine = coroutine.create(func)
+    self.coroutine = coroutine.create(self:getter(func))
     self.wait_timer = 0
     self:resume(self, ...)
 end
@@ -14,6 +16,18 @@ function Cutscene:update()
     elseif coroutine.status(self.coroutine) == "dead" and self:canEnd() then
         self:endCutscene()
     end
+end
+
+function Cutscene:getter(id)
+    local func = id
+    if type(id) == "string" then
+        local split = Utils.split(id, ".")
+        func = require(self.PATH_PREFIX..split[1])
+        if type(func) == "table" and split[2] then
+            func = func[split[2]]
+        end
+    end
+    return func
 end
 
 function Cutscene:endCutscene()

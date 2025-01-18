@@ -43,9 +43,6 @@ end
 
 function BattleCutscene:init(func)
     RipstalActiveCutsene = self
-    if type(func) == "string" then
-        func = require('RipstalCutscenes.'..func)
-    end
     super.init(self, func)
 end
 
