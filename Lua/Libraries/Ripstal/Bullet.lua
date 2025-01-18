@@ -24,7 +24,7 @@ function Bullet:init(x,y, sprite)
     self.relative = false
     self.vel_x = 0
     self.vel_y = 0
-    self.remove_on_hit = true
+    self.remove_on_hit = "always"
     self.damage = nil
 end
 
@@ -70,12 +70,17 @@ function Bullet:update(dt)
 end
 
 function Bullet:onHit()
-    -- TODO: Calculate value based on enemy attack
-    -- TODO: somehow check if player was invincible
-    if not Player.ishurting and self.remove_on_hit then
+    if (not Player.ishurting or (self.remove_on_hit == "always")) and self.remove_on_hit then
         self:remove()
     end
-    Player.hurt(self.damage or 3)
+    -- TODO: Calculate value based on enemy attack
+    if self.damage then
+        Player.hurt(self.damage)
+    elseif Encounter then
+        Encounter.call("RipstalInternalHurtPlayerFrom", 1)
+    else
+        RipstalInternalHurtPlayerFrom(1)
+    end
 end
 
 return Bullet
