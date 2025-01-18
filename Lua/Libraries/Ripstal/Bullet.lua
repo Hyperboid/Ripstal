@@ -4,7 +4,9 @@ local Bullet, super = Class()
 Update = Utils.override(Update, function (orig)
     orig()
     for _, bullet in pairs(ALL_BULLETS) do
-        bullet:update(1/60)
+        if bullet.did_init ~= nil then
+            bullet:update(1/60)
+        end
     end
 end)
 
@@ -24,11 +26,12 @@ function Bullet:init(x,y, sprite)
     self.relative = false
     self.vel_x = 0
     self.vel_y = 0
+    self.did_init = true
 end
 
 function Bullet:setPosition(x,y)
     self.x = x or 0; self.y = y or 0
-    self:update(0)
+    self:syncPosition()
 end
 
 ---@param layer string?
@@ -36,7 +39,7 @@ function Bullet:spawn(layer)
     self:remove()
     table.insert(ALL_BULLETS, self)
     self.uobject = CreateProjectile(self.sprite, -100, -100, layer)
-    self:update(0)
+    self:syncPosition(0)
     self.uobject.setVar("BulletClass", self)
 end
 
@@ -49,7 +52,7 @@ function Bullet:remove()
     return true
 end
 
-function Bullet:update(dt)
+function Bullet:syncPosition()
     if self.uobject then
         if self.relative then
             self.uobject.x = self.x
@@ -59,8 +62,12 @@ function Bullet:update(dt)
             self.uobject.absy = self.y
         end
     end
+end
+
+function Bullet:update(dt)
     self.x = self.x + ((self.vel_x or 0) * dt)
     self.y = self.y + ((self.vel_y or 0) * dt)
+    self:syncPosition()
 end
 
 function Bullet:onHit()
