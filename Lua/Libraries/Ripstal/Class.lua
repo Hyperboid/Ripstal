@@ -24,6 +24,7 @@ return function (include, id)
     local class = {
         __super = include or PrimitaveClass,
         __index = include or PrimitaveClass,
+        __call = PrimitaveClass.__call
     }
 
     setmetatable(class, class)

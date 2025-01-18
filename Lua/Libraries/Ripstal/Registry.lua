@@ -17,7 +17,7 @@ end
 ---@return T
 function Registry.spawnBullet(id, ...)
     local bullet_class = Registry.getBullet(id)
-    local bullet = bullet_class:new(...)
+    local bullet = bullet_class(...)
     bullet:spawn()
     return bullet
 end

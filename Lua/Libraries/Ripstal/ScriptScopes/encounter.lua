@@ -1,5 +1,5 @@
 function StartCutscene(id)
-    RipstalActiveCutsene = BattleCutscene:new(id)
+    RipstalActiveCutsene = BattleCutscene(id)
 end
 
 function Update()
