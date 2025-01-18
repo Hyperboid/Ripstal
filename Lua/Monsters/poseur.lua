@@ -1,6 +1,6 @@
 -- A basic monster script skeleton you can copy and modify for your own creations.
 comments = {"Smells like the work\rof an enemy stand.", "Poseur is posing like his\rlife depends on it.", "Poseur's limbs shouldn't be\rmoving in this way."}
-commands = {"Act 1", "Act 2", "Act 3"}
+commands = {"Act 1", "Act 2", "Cutscene Demo"}
 randomdialogue = {"Random\nDialogue\n1.", "Random\nDialogue\n2.", "Random\nDialogue\n3."}
 
 require('Ripstal.main')
@@ -30,7 +30,7 @@ function HandleCustomCommand(command)
         currentdialogue = {"Selected\nAct 1."}
     elseif command == "ACT 2" then
         currentdialogue = {"Selected\nAct 2."}
-    elseif command == "ACT 3" then
+    elseif command == "CUTSCENE DEMO" then
         StartCutscene("example")
         return
     end
