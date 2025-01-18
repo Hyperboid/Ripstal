@@ -3,7 +3,9 @@ local BattleCutscene, super = Class(Cutscene)
 local in_text = false
 function RipstalResumeCutscene()
     in_text = false
-    RipstalActiveCutsene:tryResume()
+    if RipstalActiveCutsene then
+        RipstalActiveCutsene:tryResume()
+    end
 end
 
 function BattleCutscene:text(string, options)
@@ -13,6 +15,25 @@ function BattleCutscene:text(string, options)
     local wait = function ()
         return not in_text or GetCurrentState() ~= "DIALOGRESULT"
     end
+    if options.wait == false then
+        return wait
+    else
+        self:wait(wait)
+    end
+end
+
+function BattleCutscene:battlerText(id, string, options)
+    for index, value in ipairs(enemies) do
+        value.setVar("currentdialogue", {})
+    end
+    in_text = true
+    assert(enemies[id], "Attempt to assign text to a nonexistent enemy")
+        .setVar("currentdialogue",({string, "[func:RipstalResumeCutscene][next]"}))
+    options = options or {}
+    local wait = function ()
+        return not in_text or GetCurrentState() ~= "ENEMYDIALOGUE"
+    end
+    State("ENEMYDIALOGUE")
     if options.wait == false then
         return wait
     else
