@@ -4,9 +4,7 @@ local Bullet, super = Class()
 Update = Utils.override(Update, function (orig)
     orig()
     for _, bullet in pairs(ALL_BULLETS) do
-        if bullet.did_init ~= nil then
-            bullet:update(1/60)
-        end
+        bullet:update(1/60)
     end
 end)
 
@@ -26,7 +24,7 @@ function Bullet:init(x,y, sprite)
     self.relative = false
     self.vel_x = 0
     self.vel_y = 0
-    self.did_init = true
+    self.remove_on_hit = true
 end
 
 function Bullet:setPosition(x,y)
@@ -73,6 +71,9 @@ end
 function Bullet:onHit()
     -- TODO: Calculate value based on enemy attack
     Player.hurt(3)
+    if self.remove_on_hit then
+        self:remove()
+    end
 end
 
 return Bullet
