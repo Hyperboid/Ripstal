@@ -11,7 +11,11 @@ local PrimitaveClass = {
 
 setmetatable(PrimitaveClass, PrimitaveClass)
 
-PrimitaveClass.new = PrimitaveClass.__call
+function PrimitaveClass:new(...)
+    local line = Utils.split(debug.traceback(), "\n")[3]
+    DEBUG(line..": SomeClass:new(...) is deprecated! Please use SomeClass(...) instead!")
+    return self(...)
+end
 
 ---@generic T : Class|function
 ---
