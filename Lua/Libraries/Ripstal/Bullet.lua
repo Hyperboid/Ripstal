@@ -21,6 +21,9 @@ end
 function Bullet:init(x,y, sprite)
     self.sprite = sprite or "bullet"
     self:setPosition(x,y)
+    self.relative = false
+    self.vel_x = 0
+    self.vel_y = 0
 end
 
 function Bullet:setPosition(x,y)
@@ -34,6 +37,7 @@ function Bullet:spawn(layer)
     table.insert(ALL_BULLETS, self)
     self.uobject = CreateProjectile(self.sprite, -100, -100, layer)
     self:update(0)
+    self.uobject.setVar("BulletClass", self)
 end
 
 ---@return boolean removed # Whether anything actually happened
@@ -41,6 +45,7 @@ function Bullet:remove()
     if not self.uobject then return false end
     self.uobject.Remove()
     self.uobject = nil
+    Utils.removeFromTable(ALL_BULLETS, self)
     return true
 end
 
@@ -54,6 +59,8 @@ function Bullet:update(dt)
             self.uobject.absy = self.y
         end
     end
+    self.x = self.x + ((self.vel_x or 0) * dt)
+    self.y = self.y + ((self.vel_y or 0) * dt)
 end
 
 function Bullet:onHit()
