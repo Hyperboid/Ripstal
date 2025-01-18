@@ -23,7 +23,9 @@ possible_attacks = {"bullettest_bouncy", "bullettest_chaserorb", "bullettest_tou
 
 function EncounterStarting()
     -- If you want to change the game state immediately, this is the place.
-    StartCutscene("intro")
+    if not GetAlMightyGlobal("ripstal_example_supress_intro") then
+        StartCutscene("intro")
+    end
 end
 
 

@@ -1,3 +1,5 @@
+require("Ripstal.main")
+
 -- You've seen this one in the trailer (if you've seen the trailer).
 spawntimer = 0
 bullets = {}
