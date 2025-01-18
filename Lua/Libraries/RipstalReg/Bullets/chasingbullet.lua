@@ -4,10 +4,7 @@ local chasingbullet, super = Class(Bullet)
 function chasingbullet:init(x,y)
     super.init(self,x,y, "bullet")
     self.relative = true
-end
-
-function chasingbullet:onHit()
-    Player.hurt(4)
+    self.damage = 4
 end
 
 function chasingbullet:update(dt)

@@ -35,6 +35,7 @@ end
 ---@param layer string?
 function Bullet:spawn(layer)
     self:remove()
+    self.damage = nil
     table.insert(ALL_BULLETS, self)
     self.uobject = CreateProjectile(self.sprite, -100, -100, layer)
     self:syncPosition()
@@ -70,7 +71,7 @@ end
 
 function Bullet:onHit()
     -- TODO: Calculate value based on enemy attack
-    Player.hurt(3)
+    Player.hurt(self.damage or 3)
     if self.remove_on_hit then
         self:remove()
     end
