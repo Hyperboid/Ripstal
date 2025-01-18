@@ -25,6 +25,7 @@ function Bullet:init(x,y, sprite)
     self.vel_x = 0
     self.vel_y = 0
     self.remove_on_hit = true
+    self.damage = nil
 end
 
 function Bullet:setPosition(x,y)
@@ -35,7 +36,6 @@ end
 ---@param layer string?
 function Bullet:spawn(layer)
     self:remove()
-    self.damage = nil
     table.insert(ALL_BULLETS, self)
     self.uobject = CreateProjectile(self.sprite, -100, -100, layer)
     self:syncPosition()
@@ -71,10 +71,11 @@ end
 
 function Bullet:onHit()
     -- TODO: Calculate value based on enemy attack
-    Player.hurt(self.damage or 3)
-    if self.remove_on_hit then
+    -- TODO: somehow check if player was invincible
+    if not Player.ishurting and self.remove_on_hit then
         self:remove()
     end
+    Player.hurt(self.damage or 3)
 end
 
 return Bullet
