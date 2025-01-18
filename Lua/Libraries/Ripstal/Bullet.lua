@@ -39,7 +39,7 @@ function Bullet:spawn(layer)
     self:remove()
     table.insert(ALL_BULLETS, self)
     self.uobject = CreateProjectile(self.sprite, -100, -100, layer)
-    self:syncPosition(0)
+    self:syncPosition()
     self.uobject.setVar("BulletClass", self)
 end
 
