@@ -1,4 +1,5 @@
 Class = require("Ripstal.Class")
 Cutscene = require("Ripstal.cutscene")
 BattleCutscene = require("Ripstal.battlecutscene")
+require("Ripstal.ScriptScopes.main")
 -- Utils = require("Ripstal.utils")

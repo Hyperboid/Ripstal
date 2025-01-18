@@ -2,7 +2,7 @@
 
 require("Ripstal.main")
 -- music = "shine_on_you_crazy_diamond" --Either OGG or WAV. Extension is added automatically. Uncomment for custom music.
-encountertext = "Poseur strikes a pose!" --Modify as necessary. It will only be read out in the action select screen.
+encountertext = "What now?" --Modify as necessary. It will only be read out in the action select screen.
 nextwaves = {"bullettest_chaserorb"}
 wavetimer = 4.0
 arenasize = {155, 130}
@@ -17,29 +17,15 @@ enemypositions = {
 
 -- A custom list with attacks to choose from. Actual selection happens in EnemyDialogueEnding(). Put here in case you want to use it.
 
-local MyClass, super = Class()
-
-function MyClass:update()
-    if Input.Menu ~=0 then
-        self.rate = (self.rate or 0) + 1
-        Player.hp = (Player.hp % 20) + self.rate
-        
-    end
-end
-
----@type BattleCutscene
-MyCutscene = BattleCutscene:new("example")--= setmetatable({}, {__index = MyClass})
--- MyCutscene:init()
+-- BattleCutscene:new("example")--= setmetatable({}, {__index = MyClass})
 
 possible_attacks = {"bullettest_bouncy", "bullettest_chaserorb", "bullettest_touhou"}
 
 function EncounterStarting()
     -- If you want to change the game state immediately, this is the place.
+    StartCutscene("intro")
 end
 
-function Update()
-    MyCutscene:update()
-end
 
 function EnemyDialogueStarting()
     -- Good location for setting monster dialogue depending on how the battle is going.

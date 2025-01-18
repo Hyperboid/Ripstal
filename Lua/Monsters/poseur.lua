@@ -31,7 +31,8 @@ function HandleCustomCommand(command)
     elseif command == "ACT 2" then
         currentdialogue = {"Selected\nAct 2."}
     elseif command == "ACT 3" then
-        currentdialogue = {"Selected\nAct 3."}
+        StartCutscene("example")
+        return
     end
     BattleDialog({"You selected " .. command .. "."})
 end
