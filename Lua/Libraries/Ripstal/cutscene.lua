@@ -1,7 +1,7 @@
 ---@class Cutscene: Class
 local Cutscene, super = Class()
 
-Cutscene.PATH_PREFIX = "RipstalCutscenes."
+Cutscene.PATH_PREFIX = "RipstalReg.Cutscenes"
 
 function Cutscene:init(func, ...)
     assert(Encounter == nil, "Attempt to run a cutscene from outside the Encounter script. Use a call()!")

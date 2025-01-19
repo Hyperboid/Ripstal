@@ -8,6 +8,8 @@ function RipstalResumeCutscene()
     end
 end
 
+BattleCutscene.PATH_PREFIX = "RipstalReg.BattleCutscenes."
+
 function BattleCutscene:text(string, options)
     in_text = true
     BattleDialog({string, "[func:RipstalResumeCutscene][next]"})
