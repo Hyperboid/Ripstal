@@ -47,7 +47,7 @@ local poseur = {
             cutscene:text("Poseur's ATK increased to "..enemies[1]["atk"].."!")
             cutscene:battlerText(1, "Course not.")
         end
-    end
+    end,
 }
 
 return poseur
