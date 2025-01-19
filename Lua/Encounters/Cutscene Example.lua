@@ -16,7 +16,12 @@ enemypositions = {
 }
 
 -- A custom list with attacks to choose from. Actual selection happens in EnemyDialogueEnding(). Put here in case you want to use it.
-possible_attacks = {"bullettest_bouncy", "bullettest_chaserorb", "bullettest_touhou"}
+possible_attacks = {
+    "bullettest_bouncy",
+    "bullettest_chaserorb",
+    "bullettest_touhou",
+    "bullettest_bouncy_alt"
+}
 
 function EncounterStarting()
     -- If you want to change the game state immediately, this is the place.
