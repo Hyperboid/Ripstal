@@ -27,7 +27,7 @@ end
 -- This handles the commands; all-caps versions of the commands list you have above.
 function HandleCustomCommand(command)
     if command == "CUTSCENE DEMO" then
-        StartCutscene("example")
+        StartCutscene("poseur.example")
         return
     elseif command == "CS GROUP A" then
         StartCutscene("group.test")
