@@ -5,7 +5,7 @@ Registry.data = {bullets = {}}
 
 ---@generic T:Bullet
 ---@param id Bullet.`T`
----@return T
+---@return T|fun(...):T
 function Registry.getBullet(id)
     if self.data.bullets[id] then return self.data.bullets[id] end
     self.data.bullets[id] = require("RipstalReg.Bullets."..id)
