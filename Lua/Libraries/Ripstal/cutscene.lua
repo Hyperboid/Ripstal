@@ -5,7 +5,7 @@ Cutscene.PATH_PREFIX = "RipstalReg.Cutscenes"
 
 function Cutscene:init(func, ...)
     assert(Encounter == nil, "Attempt to run a cutscene from outside the Encounter script. Use a call()!")
-    self.coroutine = coroutine.create(self:getter(func))
+    self.coroutine = coroutine.create(Utils.xpwrap(self:getter(func)))
     self.wait_timer = 0
     self:resume(self, ...)
 end
@@ -62,7 +62,7 @@ function Cutscene:resume(...)
     self.wait_func = nil
     local ok, msg = coroutine.resume(self.coroutine, ...)
     if not ok then
-        error(msg.."\n"..debug.traceback(self.coroutine):gsub("\r", "\n    ").."\nend tback")
+        error(msg)
     end
 end
 

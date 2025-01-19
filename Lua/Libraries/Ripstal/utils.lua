@@ -2259,4 +2259,26 @@ function Utils.xor(...)
     return counter % 2 == 1
 end
 
+
+function Utils.xpwrap(func)
+    return function (...)
+        ---@param msg string
+        local res = Utils.pack(xpcall(func, function(msg)
+            return debug.traceback(msg, 2)
+        end, ...))
+        local ok = table.remove(res, 1)
+        if not ok then
+            local full_err = Utils.split(res[1], "\n")
+            for i = 1, #full_err do
+                local split_line = Utils.split(full_err[i], "/Mods/")
+                if #split_line > 1 then
+                    split_line[1] = "<CYF>"
+                end
+                full_err[i] = table.concat(split_line, "/Mods/")
+            end
+            error(table.concat(full_err, "\n"))
+        end
+    end
+end
+
 return Utils
