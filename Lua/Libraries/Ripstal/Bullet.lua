@@ -83,4 +83,18 @@ function Bullet:onHit()
     end
 end
 
+function Bullet:getPPCollision()
+    if not self.uobject.ppchanged then return nil end
+    return self.uobject.ppcollision
+end
+
+---@param value boolean?
+function Bullet:setPPCollision(value)
+    if value == nil then
+        self.uobject.ResetCollisionSystem()
+    else
+        self.uobject.ppcollision = value
+    end
+end
+
 return Bullet
