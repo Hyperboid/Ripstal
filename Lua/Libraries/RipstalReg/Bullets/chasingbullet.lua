@@ -11,8 +11,8 @@ function chasingbullet:update(dt)
     local xdifference = Player.x - self.x
     local ydifference = Player.y - self.y
     -- todo: restore accuracy
-    self.vel_x = self.vel_x / 2 + xdifference * (60*dt*.75)
-    self.vel_y = self.vel_y / 2 + ydifference * (60*dt*.75)
+    self.physics.speed_x = ((self.physics.speed_x * 15) + xdifference) * (.75/30)
+    self.physics.speed_y = ((self.physics.speed_y * 15) + ydifference) * (.75/30)
 end
 
 return chasingbullet

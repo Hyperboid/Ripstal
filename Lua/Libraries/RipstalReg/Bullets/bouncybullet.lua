@@ -8,16 +8,16 @@ end
 
 -- TODO: Make physics_table and rewrite this
 function bouncybullet:update(dt)
-    local newposx = self.x + self.vel_x
-    local newposy = self.y + self.vel_y
+    local newposy = self.y + self.physics.speed_y
     if(self.x > -Arena.width/2 and self.x < Arena.width/2) then
         if(self.y < -Arena.height/2 + 8) then
             newposy = -Arena.height/2 + 8
-            self.vel_y = 4
+            self.physics.speed_y = 4
         end
     end
-    self.vel_y = self.vel_y - (0.04*dt*60)
-    self:setPosition(newposx, newposy)
+    self.physics.speed_y = self.physics.speed_y - (0.04*dt*60)
     super.update(self,dt)
+    self:setPosition(self.x, newposy)
 end
+
 return bouncybullet

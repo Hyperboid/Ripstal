@@ -13,8 +13,6 @@ function Bullet:init(x,y, sprite)
     super.init(self,x,y)
     self.sprite = sprite or "bullet"
     self.relative = false
-    self.vel_x = 0
-    self.vel_y = 0
     self.remove_on_hit = "always"
     self.damage = nil
 end

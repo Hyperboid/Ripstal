@@ -8,7 +8,7 @@ spawntimer:everyInstant(1.5, function ()
     local posy = Arena.height/2
     spawntimer:every(.05, function ()
         local bullet = Registry.getBullet("bouncybullet")(posx, posy)
-        bullet.vel_x = 1 - 2*math.random()
+        bullet.physics.speed_x = Utils.random(-1, 1)
         bullet:spawn()
     end, 10)
 end)
